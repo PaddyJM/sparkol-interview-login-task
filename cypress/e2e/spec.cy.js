@@ -3,7 +3,7 @@ describe('template spec', () => {
     cy.visit('http://localhost:3000')
   })
 
-  it('redirects to /login', () => {
+  it('redirects to /login when the user is not logged in', () => {
     cy.visit('http://localhost:3000')
     cy.url().should('include', '/login')
   });
