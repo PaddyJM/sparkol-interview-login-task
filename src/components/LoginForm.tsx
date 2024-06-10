@@ -30,7 +30,9 @@ const LoginForm: React.FC = () => {
 
     setIsLoggedIn(true);
     setUsername(response.data.user.name);
+
     localStorage.setItem("token", response.data.token);
+    
     console.log("Redirecting to /");
     navigate("/");
   };
