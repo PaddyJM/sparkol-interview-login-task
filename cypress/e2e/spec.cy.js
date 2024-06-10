@@ -25,4 +25,13 @@ describe('template spec', () => {
     cy.get('button').click()
     cy.get('h1').contains('Welcome jeff1967!')
   })
+
+  it('logs the user out when they click the login button', () => {
+    cy.visit('http://localhost:3000')
+    cy.get('input[name="username"]').type('jeff1967')
+    cy.get('input[name="password"]').type('hotdog')
+    cy.get('button').click()
+    cy.get('button').click()
+    cy.get('p').contains('Login to your account')
+  })
 })
