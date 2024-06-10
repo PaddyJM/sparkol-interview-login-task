@@ -17,3 +17,9 @@ Once done, run the application using
 ```
 npm start
 ```
+
+## Testing
+
+```
+npm run test
+```
