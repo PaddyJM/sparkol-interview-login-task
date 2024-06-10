@@ -9,8 +9,9 @@ const Welcome: React.FC<WelcomeProps> = ({ username }) => {
   const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
     console.log('Logging out...')
+    setIsLoggedIn(false);
+    localStorage.removeItem("token");
   };
 
   return (
