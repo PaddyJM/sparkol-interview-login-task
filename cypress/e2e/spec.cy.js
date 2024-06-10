@@ -23,6 +23,6 @@ describe('template spec', () => {
     cy.get('input[name="username"]').type('jeff1967')
     cy.get('input[name="password"]').type('hotdog')
     cy.get('button').click()
-    cy.get('h1').contains('Welcome jess1967!')
+    cy.get('h1').contains('Welcome jeff1967!')
   })
 })

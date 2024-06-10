@@ -6,9 +6,11 @@ const LoginForm: React.FC = () => {
   const navigate = useNavigate();
 
   const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+  const setUsername = useAuthStore((state) => state.setUsername);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    setUsername((document.getElementById("username") as HTMLInputElement).value);
     console.log('Redirecting to /')
     navigate("/");
   };

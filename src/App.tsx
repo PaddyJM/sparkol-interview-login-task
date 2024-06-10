@@ -7,6 +7,7 @@ import Welcome from "./components/Welcome";
 
 function App() {
   const isLoggedIn = useAuthStore((state: AuthState) => state.isLoggedIn);
+  const username = useAuthStore((state: AuthState) => state.username);
 
   return (
     <div className="App">
@@ -16,7 +17,7 @@ function App() {
             path="/"
             element={
               isLoggedIn ? (
-                <Welcome username="user" />
+                <Welcome username={username} />
               ) : (
                 <Navigate to="/login" />
               )
