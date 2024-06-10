@@ -6,13 +6,22 @@ import useAuthStore, { AuthState } from "./stores/authStore";
 import Welcome from "./components/Welcome";
 
 function App() {
-  const isLoggedIn = useAuthStore((state: AuthState) => state.isLoggedIn)
+  const isLoggedIn = useAuthStore((state: AuthState) => state.isLoggedIn);
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={isLoggedIn ? <Welcome username="user" /> : <Navigate to='/login'/>}/>
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? (
+                <Welcome username="user" />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
           <Route path="/login" element={<LoginForm />} />
         </Routes>
       </BrowserRouter>
