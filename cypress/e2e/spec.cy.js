@@ -18,4 +18,12 @@ describe('template spec', () => {
     cy.get('input[name="password"]').should('exist')
     cy.get('button').contains('Login')
   })
+
+  it('Displays a welcome message when the user successfully logs in', () => {
+    cy.visit('http://localhost:3000')
+    cy.get('input[name="username"]').type('jeff1967')
+    cy.get('input[name="password"]').type('hotdog')
+    cy.get('button').click()
+    cy.get('h1').contains('Welcome!')
+  })
 })
