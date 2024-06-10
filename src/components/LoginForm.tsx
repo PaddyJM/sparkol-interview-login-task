@@ -1,6 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/authStore";
+import axios from "axios";
+
+type LoginResponse = {
+  user: {
+    name: string;
+    id: number;
+  };
+  token: string;
+};
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -8,10 +17,21 @@ const LoginForm: React.FC = () => {
   const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
   const setUsername = useAuthStore((state) => state.setUsername);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    const response = await axios.post<LoginResponse>(
+      "http://localhost:3333/login",
+      {
+        username: (document.getElementById("username") as HTMLInputElement)
+          .value,
+        password: (document.getElementById("password") as HTMLInputElement)
+          .value,
+      }
+    );
+
     setIsLoggedIn(true);
-    setUsername((document.getElementById("username") as HTMLInputElement).value);
-    console.log('Redirecting to /')
+    setUsername(response.data.user.name);
+    localStorage.setItem("token", response.data.token);
+    console.log("Redirecting to /");
     navigate("/");
   };
   return (
