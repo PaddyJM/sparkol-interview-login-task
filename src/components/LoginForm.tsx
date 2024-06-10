@@ -1,8 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../stores/authStore";
 
-function LoginForm() {
+const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
+
+  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    console.log('Redirecting to /')
+    navigate("/");
+  };
   return (
-    <form id="login-form">
+    <div id="login-form">
       <p>Login to your account:</p>
       <br />
       <label>Username:</label>
@@ -11,9 +22,11 @@ function LoginForm() {
       <label>Password:</label>
       <input type="password" id="password" name="password" />
       <br /> <br />
-      <button id="login">Login</button>
-    </form>
+      <button id="login" onClick={handleLogin}>
+        Login
+      </button>
+    </div>
   );
-}
+};
 
 export default LoginForm;

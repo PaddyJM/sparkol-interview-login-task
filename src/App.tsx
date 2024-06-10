@@ -1,10 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "./components/LoginForm";
+import useAuthStore, { AuthState } from "./stores/authStore";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useAuthStore((state: AuthState) => state.isLoggedIn)
 
   return (
     <div className="App">
