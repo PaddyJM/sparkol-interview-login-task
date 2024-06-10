@@ -1,20 +1,19 @@
 import "./App.css";
-import React from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import LoginForm from "./components/LoginForm";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className="App">
-      <form id="login-form">
-        <p>Login to your account:</p>
-        <br />
-        <label>Username:</label>
-        <input type="text" id="username" name="username" />
-        <br /> <br />
-        <label>Password:</label>
-        <input type="password" id="password" name="password" />
-        <br /> <br />
-        <button id="login">Login</button>
-      </form>
+      <BrowserRouter>
+        <Routes>
+        <Route path="/" element={isLoggedIn ? <h1>Welcome!</h1> : <Navigate to='/login'/>}/>
+          <Route path="/login" element={<LoginForm />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

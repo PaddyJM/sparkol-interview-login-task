@@ -3,6 +3,11 @@ describe('template spec', () => {
     cy.visit('http://localhost:3000')
   })
 
+  it('redirects to /login', () => {
+    cy.visit('http://localhost:3000')
+    cy.url().should('include', '/login')
+  });
+
   it('displays input text fields for user name and password and a login button', () => {
     cy.visit('http://localhost:3000')
     cy.get('p').contains('Login to your account')
