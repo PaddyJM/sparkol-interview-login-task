@@ -1,16 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/authStore";
-import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import Client from "../Client";
 
-type LoginResponse = {
-  user: {
-    name: string;
-    id: number;
-  };
-  token: string;
-};
+const client = new Client();
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -19,36 +13,15 @@ const LoginForm: React.FC = () => {
   const setUsername = useAuthStore((state) => state.setUsername);
 
   const handleLogin = async () => {
-    let response;
-
-    try {
-      response = await axios.post<LoginResponse>(
-        `${process.env.REACT_APP_AUTH_SERVICE_URL}/login`,
-        {
-          username: (document.getElementById("username") as HTMLInputElement)
-            .value,
-          password: (document.getElementById("password") as HTMLInputElement)
-            .value,
-        }
-      );
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.status === 401) {
-          toast.error("Invalid username or password");
-          console.error("Invalid username or password");
-        }
-        console.error(error.response?.data);
-      }
-    }
-
-    if (!response) {
-      return;
-    }
+    const data = await client.login(
+      (document.getElementById("username") as HTMLInputElement).value ,
+      (document.getElementById("password") as HTMLInputElement).value
+    );
 
     setIsLoggedIn(true);
-    setUsername(response.data.user.name);
+    setUsername(data.user.name);
 
-    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("token", data.token);
 
     console.log("Redirecting to /");
     navigate("/");
