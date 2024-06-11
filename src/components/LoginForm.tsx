@@ -11,6 +11,7 @@ const LoginForm: React.FC = () => {
 
   const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
   const setUsername = useAuthStore((state) => state.setUsername);
+  const setLastLoggedIn = useAuthStore((state) => state.setLastLoggedIn);
 
   const handleLogin = async () => {
     const data = await client.login(
@@ -20,6 +21,7 @@ const LoginForm: React.FC = () => {
 
     if (!data) return;
 
+    setLastLoggedIn(data.user.lastLoggedIn)
     setIsLoggedIn(true);
     setUsername(data.user.name);
 

@@ -5,6 +5,7 @@ type LoginResponse = {
   user: {
     name: string;
     id: number;
+    lastLoggedIn: string;
   };
   token: string;
 };
