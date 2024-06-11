@@ -20,7 +20,7 @@ const LoginForm: React.FC = () => {
 
   const handleLogin = async () => {
     let response;
-    console.log(process.env.REACT_APP_AUTH_SERVICE_URL)
+
     try {
       response = await axios.post<LoginResponse>(
         `${process.env.REACT_APP_AUTH_SERVICE_URL}/login`,
