@@ -17,7 +17,10 @@ const useAuthStore = create<AuthState>((set) => ({
   },
   username: "",
   setUsername: (username: string) => set({ username }),
-  setLastLoggedIn: (lastLoggedIn: string) => set({ lastLoggedIn }),
+  setLastLoggedIn: (lastLoggedIn: string) => {
+    const formattedDate = (new Date(lastLoggedIn)).toLocaleDateString();
+    set({ lastLoggedIn: formattedDate })
+  },
 }));
 
 export default useAuthStore;
