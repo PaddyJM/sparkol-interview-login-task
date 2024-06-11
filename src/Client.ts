@@ -23,11 +23,16 @@ export default class Client {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 401) {
           toast.error("Invalid username or password");
-          console.error("Invalid username or password");
+          console.error(error);
+        } else {
+          toast.error("An error occurred. Please try again later.");
+          console.error(error);
         }
-        console.error(error.response?.data);
+      } else {
+        toast.error("An error occurred. Please try again later.");
+        console.error(error);
       }
-      throw new Error("Login failed");
+      return;
     }
 
     return response.data;

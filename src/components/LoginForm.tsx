@@ -14,9 +14,11 @@ const LoginForm: React.FC = () => {
 
   const handleLogin = async () => {
     const data = await client.login(
-      (document.getElementById("username") as HTMLInputElement).value ,
+      (document.getElementById("username") as HTMLInputElement).value,
       (document.getElementById("password") as HTMLInputElement).value
     );
+
+    if (!data) return;
 
     setIsLoggedIn(true);
     setUsername(data.user.name);
